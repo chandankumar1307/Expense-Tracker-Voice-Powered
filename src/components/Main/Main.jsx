@@ -8,6 +8,7 @@ import {
   Card,
 } from "@material-ui/core";
 import { ExpenseTrackerContext } from "../../context/context";
+import InfoCard from "./InfoCard";
 import Form from "./Form/Form";
 import useStyles from "./styles";
 import List from "./List/List";
@@ -25,7 +26,7 @@ const Main = () => {
           variant="subtitle1"
           style={{ lineHeight: "1.5em", marginTop: "20px" }}
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <InfoCard />
         </Typography>
         <Divider />
         <Form />

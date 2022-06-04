@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { v4 as uuidV4 } from "uuid";
 import { useSpeechContext } from "@speechly/react-client";
+import CustomizedSnackbar from "../../Snackbar/Snackbar";
 import {
   TextField,
   Typography,
@@ -31,6 +32,7 @@ const Form = () => {
   const classes = useStyles();
   const { addTransaction } = useContext(ExpenseTrackerContext);
   const { segment } = useSpeechContext();
+  const [open, setOpen] = useState(false);
   const createTransaction = () => {
     if (Number.isNaN(Number(formData.amount)) || !formData.date.includes("-"))
       return;
@@ -43,6 +45,7 @@ const Form = () => {
     // console.log(transaction);
 
     addTransaction(transaction);
+    setOpen(true);
     SetFormData(initialState);
   };
 
@@ -110,6 +113,7 @@ const Form = () => {
   // console.log(formData);
   return (
     <Grid container spacing={2}>
+      <CustomizedSnackbar open={open} setOpen={setOpen} />
       <Grid item xs={12}>
         <Typography align="center" variant="subtitle2" gutterBottom>
           {segment && segment.words.map((w) => w.value).join(" ")}
