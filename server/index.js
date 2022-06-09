@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import router from './routes/auth.js';
+import privateRoute from './routes/private.js'
 import connectDB from './config/config.js';
 import errorHandler from './middleware/error.js';
 
@@ -19,6 +20,7 @@ app.use(cors());
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use('/api/auth', router)
+app.use('/api/private', privateRoute)
 
 app.use(errorHandler)
 
