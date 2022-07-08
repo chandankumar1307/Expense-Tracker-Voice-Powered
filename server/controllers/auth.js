@@ -1,8 +1,32 @@
 import User from '../models/User.js';
+import mongoose from 'mongoose';
 import ErrorResponse from '../utils/errorResponse.js';
 import sendEmail from '../utils/sendEmail.js';
 import crypto from 'crypto';
+import Expense from '../models/Expense.js';
 
+
+export const saveExpense = async (req, res) => {
+    const expneseData = req.body;
+    const Expenses = new Expense(expneseData)
+
+    try {
+        await Expenses.save();
+        res.status(201).json(Expenses)
+
+    } catch (error) {
+
+    }
+}
+
+export const getExpense = async (req, res) => {
+    try {
+        const allExpense = await Expense.find();
+        res.status(200).json(allExpense)
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+}
 
 export const register = async (req, res, next) => {
     // res.send("Register Route");
@@ -106,6 +130,8 @@ export const resetpassword = async (req, res, next) => {
         next(error)
     }
 }
+
+
 
 const sendToken = (user, statusCode, res) => {
     const token = user.getSignedToken()

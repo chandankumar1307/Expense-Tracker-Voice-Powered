@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import Details from "../Details/Details";
+import { useNavigate } from "react-router-dom";
 import Main from "../Main/Main";
 //import { SpeechState, useSpeechContext } from '@speechly/react-client'
 import {
@@ -11,6 +12,8 @@ import {
 import useStyles from "./styles";
 
 const ExpenseTracker = () => {
+  const navigate = useNavigate();
+  useEffect(() => {}, [navigate]);
   const classes = useStyles();
   return (
     <div>
@@ -35,10 +38,10 @@ const ExpenseTracker = () => {
           <Details title="Expense" />
         </Grid>
       </Grid>
-      <PushToTalkButtonContainer>
+      {/* <PushToTalkButtonContainer>
         <PushToTalkButton />
         <ErrorPanel />
-      </PushToTalkButtonContainer>
+      </PushToTalkButtonContainer> */}
     </div>
   );
 };

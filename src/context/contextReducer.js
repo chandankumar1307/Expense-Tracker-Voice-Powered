@@ -6,6 +6,7 @@ const contextReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_TRANSACTION':
             transactions = [action.payload, ...state]
+            console.log(transactions);
             localStorage.setItem('transactions', JSON.stringify(transactions));
             return transactions;
 

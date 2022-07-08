@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { ExpenseTrackerContext } from "../../../context/context";
 import { v4 as uuidV4 } from "uuid";
 import { useSpeechContext } from "@speechly/react-client";
 import CustomizedSnackbar from "../../Snackbar/Snackbar";
@@ -12,15 +13,17 @@ import {
   Select,
   MenuItem,
 } from "@material-ui/core";
-import { ExpenseTrackerContext } from "../../../context/context";
+
 import {
   incomeCategories,
   expenseCategories,
 } from "../../../constants/categories";
 import formateDate from "../../../utils/formateDate";
+import axios from "axios";
 import useStyles from "./styles";
-
+const name = localStorage.getItem("username");
 const initialState = {
+  name: name,
   amount: "",
   category: "",
   type: "Income",
@@ -30,9 +33,12 @@ const initialState = {
 const Form = () => {
   const [formData, SetFormData] = useState(initialState);
   const classes = useStyles();
+
   const { addTransaction } = useContext(ExpenseTrackerContext);
+
   const { segment } = useSpeechContext();
   const [open, setOpen] = useState(false);
+
   const createTransaction = () => {
     if (Number.isNaN(Number(formData.amount)) || !formData.date.includes("-"))
       return;
@@ -42,9 +48,9 @@ const Form = () => {
       amount: Number(formData.amount),
       id: uuidV4(),
     };
-    // console.log(transaction);
 
     addTransaction(transaction);
+
     setOpen(true);
     SetFormData(initialState);
   };
@@ -110,7 +116,6 @@ const Form = () => {
   const selectedCategories =
     formData.type === "Income" ? incomeCategories : expenseCategories;
 
-  // console.log(formData);
   return (
     <Grid container spacing={2}>
       <CustomizedSnackbar open={open} setOpen={setOpen} />
