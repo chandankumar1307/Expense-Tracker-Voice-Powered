@@ -43,7 +43,7 @@ const Auth = () => {
     console.log(username);
     localStorage.setItem("profile", JSON.stringify({ username, googleID }));
     console.log(res);
-    navigate("/");
+    navigate("/expense");
   };
 
   const GoogleFailure = () => {

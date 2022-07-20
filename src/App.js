@@ -27,8 +27,8 @@ const App = () => {
         <div>
             {/* <ExpenseTracker /> */}
             <Routes>
-                <Route exact path='/' element={<ExpenseTracker />} />
-                <Route exact path='/login' element={<Auth />} />
+                <Route exact path='/' element={<Auth />} />
+                <Route exact path='/expense' element={<ExpenseTracker />} />
             </Routes>
 
         </div>
